@@ -15,7 +15,7 @@ trabalhos e tutoriais indicados por seus usuários.
 A principal fonte de alimentação do blog são as discussões apresentadas no grupo 
 de WhatsApp do blackbeltR. Você pode ingressar no grupo utilizando este 
 [CONVITE](https://chat.whatsapp.com/9SJtJiOw6YN1DtVWeMGUhe). Periodicamente, 
-nós selecionamos eventuais técnicas e assuntos discutidos grupo para compor o 
+nós selecionamos eventuais técnicas e assuntos discutidos no grupo para compor o 
 blog. Os envolvidos são convidados a escreverem um breve post em `RMarkdown`. 
 Desta forma, os autores encontram no **blackbeltR Blog** um meio para divulgar seu 
 trabalho intelectual, ao mesmo tempo em que contribuem para o crescimento da 
