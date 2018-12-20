@@ -9,7 +9,7 @@ base_url: https://blackbeltR.github.io/blog/
 output_dir: "."
 navbar:
   logo:
-    image: images/blackbeltR_logo.png
+    image: images/kimono_v1.png
     href: https://blackbeltR.github.io/
   right:
     - text: "Home"

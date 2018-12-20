@@ -8,6 +8,8 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+![](./images/cinto_v1.png){ width=20% }
+
 O **blackbeltR Blog** é um espaço colaborativo focado em qualquer aspecto ou tópico 
 que envolva programação em R. Os posts e artigos deste blog são oriundos de dúvidas, 
 trabalhos e tutoriais indicados por seus usuários.
