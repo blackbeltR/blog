@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>https://blackbeltRBlog.github.io/about.html</loc>
+    <loc>https://blackbeltR.github.io/blog/about.html</loc>
     <lastmod>2018-12-20T00:05:32-02:00</lastmod>
   </url>
   <url>
-    <loc>https://blackbeltRBlog.github.io/contributors.html</loc>
+    <loc>https://blackbeltR.github.io/blog/contributors.html</loc>
     <lastmod>2018-12-20T00:03:12-02:00</lastmod>
   </url>
   <url>
-    <loc>https://blackbeltRBlog.github.io/</loc>
+    <loc>https://blackbeltR.github.io/blog/</loc>
     <lastmod>2018-12-20T00:03:12-02:00</lastmod>
   </url>
   <url>
-    <loc>https://blackbeltRBlog.github.io/posts/welcome/</loc>
-    <lastmod>2018-12-19T20:19:20-02:00</lastmod>
+    <loc>https://blackbeltR.github.io/blog/posts/welcome/</loc>
+    <lastmod>2018-12-20T00:03:12-02:00</lastmod>
   </url>
 </urlset>

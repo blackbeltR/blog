@@ -5,9 +5,12 @@ description: |
   programação em R. A ideia é oferecer uma plataforma colaborativa em que
   os próprios usuários possam contribuir com posts em nível acadêmico. Nosso
   objetivo é formar faixas-pretas em R!
-base_url: https://blackbeltRBlog.github.io
+base_url: https://blackbeltR.github.io/blog/
 output_dir: "."
 navbar:
+  logo:
+    image: images/logo.png
+    href: https://blackbeltR.github.io/
   right:
     - text: "Home"
       href: index.html
