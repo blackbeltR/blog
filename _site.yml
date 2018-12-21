@@ -10,7 +10,7 @@ output_dir: "."
 navbar:
   logo:
     image: images/kimono_v1.png
-    href: https://blackbeltR.github.io/
+    href: http://blackbeltR.netlify.com
   right:
     - text: "Home"
       href: index.html
