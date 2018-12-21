@@ -19,7 +19,7 @@ navbar:
     - text: "Idealizadores & Editores"
       href: contributors.html
     - text: "Main Site"
-      href: http://blackbeltR.github.io
+      href: http://blackbeltR.netlify.com
     - icon: fa fa-rss
       href: index.xml
 collections:
