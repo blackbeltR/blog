@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Idealizadores:
 
 - Pedro C. Brom [`r icon::fa("link")`]() 
-[`r icon::fa("github")`]()
+[`r icon::fa("github")`](https://github.com/pcbrom)
 [`r icon::fa("stack-overflow")`]()
 [`r icon::fa("linkedin")`]()
 
@@ -20,10 +20,10 @@ knitr::opts_chunk$set(echo = FALSE)
 [`r icon::fa("stack-overflow")`](https://stackoverflow.com/users/8287109/allanvc)
 [`r icon::fa("linkedin")`](https://www.linkedin.com/in/allan-vieira/)
 
-- Eduardo O. Hellas [`r icon::fa("link")`]()
-[`r icon::fa("github")`]()
-[`r icon::fa("stack-overflow")`]()
-[`r icon::fa("linkedin")`]()
+- Eduardo O. Hellas [`r icon::fa("link")`](https://pinduzera.github.io) 
+[`r icon::fa("github")`](https://github.com/pinduzera)
+[`r icon::fa("stack-overflow")`](https://stackoverflow.com/users/5322743/ochetski)
+[`r icon::fa("linkedin")`](https://www.linkedin.com/in/eduardo-hellas-8b0771110/)
 
 # Editores:
 
