@@ -3,15 +3,16 @@ title: "Bem-vindo ao blackbeltR Blog"
 description: |
   Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o 
   conteúdo e torne-se um faixa preta em R!
+preview: ./img/kimono_v1.png
 author:
   - name: 
-      Allan Quadros
+      Pedro C. Brom
     url: https://www.blackbeltr.com.br
     affiliation: BlackbeltR
     affiliation_url: https://www.blackbeltr.com.br
   - name: 
-      Pedro Brom
-    url: https://www.blackbeltr.com.br
+      Allan V. C. Quadros
+    url: https://allanvc.github.io
     affiliation: BlackbeltR
     affiliation_url: https://www.blackbeltr.com.br
 date: 12-24-2018
@@ -29,4 +30,4 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-
+![](./img/kimono_v1.png){ width=50% }

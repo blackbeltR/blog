@@ -1,21 +1,40 @@
 [
   {
+    "path": "posts/2018-12-24-scraping-google-news-with-rvest/",
+    "title": "Scraping Google News with 'rvest'",
+    "description": "This is an example of how to scrape Google News website with the awesome rvest package.\nOriginally posted on https://allanvc.github.io.",
+    "author": [
+      {
+        "name": "Allan V. C. Quadros",
+        "url": "https://allanvc.github.io"
+      }
+    ],
+    "date": "2018-12-24",
+    "categories": [],
+    "preview": "posts/2018-12-24-scraping-google-news-with-rvest/./img/google_news_screenshot.png",
+    "last_modified": "2018-12-24T20:05:43-02:00",
+    "preview_width": 1920,
+    "preview_height": 1080
+  },
+  {
     "path": "posts/welcome/",
     "title": "Bem-vindo ao blackbeltR Blog",
     "description": "Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o \nconteúdo e torne-se um faixa preta em R!",
     "author": [
       {
-        "name": "Allan Quadros",
+        "name": "Pedro C. Brom",
         "url": "https://www.blackbeltr.com.br"
       },
       {
-        "name": "Pedro Brom",
-        "url": "https://www.blackbeltr.com.br"
+        "name": "Allan V. C. Quadros",
+        "url": "https://allanvc.github.io"
       }
     ],
     "date": "2018-12-24",
     "categories": [],
-    "preview": {},
-    "last_modified": "2018-12-24T13:28:33-02:00"
+    "preview": "posts/welcome/./img/kimono_v1.png",
+    "last_modified": "2018-12-24T20:00:01-02:00",
+    "preview_width": 861,
+    "preview_height": 836
   }
 ]
