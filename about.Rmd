@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo = FALSE)
 </center>
 
 O **blackbeltR Blog** é um espaço colaborativo focado em qualquer aspecto ou tópico 
-que envolva programação em R. Os posts e artigos deste blog são oriundos de dúvidas, 
-trabalhos e tutoriais indicados por seus usuários.
+que envolva programação em R ou Data Science. Os posts e artigos deste blog são 
+oriundos de dúvidas, trabalhos e tutoriais indicados por seus usuários.
 
 A principal fonte de alimentação do blog são as discussões apresentadas no grupo 
 de WhatsApp do blackbeltR. Você pode ingressar no grupo utilizando este 

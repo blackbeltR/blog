@@ -10,15 +10,16 @@ os próprios usuários possam contribuir com posts em nível acadêmico. Nosso
 objetivo é formar faixas-pretas em R!
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Wed, 19 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Dec 2018 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Welcome to blackbeltR Blog</title>
-      <dc:creator>Nora Jones</dc:creator>
+      <title>Bem-vindo ao blackbeltR Blog</title>
+      <dc:creator>Allan Quadros</dc:creator>
+      <dc:creator>Pedro Brom</dc:creator>
       <link>https://blackbeltR.github.io/blog/posts/welcome</link>
-      <description>Welcome to our new blog, blackbeltR Blog. We hope you enjoy 
-reading what we have to say!</description>
+      <description>Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o 
+conteúdo e torne-se um faixa preta em R!</description>
       <guid>https://blackbeltR.github.io/blog/posts/welcome</guid>
-      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Dec 2018 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>

@@ -1,14 +1,20 @@
 ---
-title: "Welcome to blackbeltR Blog"
+title: "Bem-vindo ao blackbeltR Blog"
 description: |
-  Welcome to our new blog, blackbeltR Blog. We hope you enjoy 
-  reading what we have to say!
+  Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o 
+  conteúdo e torne-se um faixa preta em R!
 author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: 12-19-2018
+  - name: 
+      Allan Quadros
+    url: https://www.blackbeltr.com.br
+    affiliation: BlackbeltR
+    affiliation_url: https://www.blackbeltr.com.br
+  - name: 
+      Pedro Brom
+    url: https://www.blackbeltr.com.br
+    affiliation: BlackbeltR
+    affiliation_url: https://www.blackbeltr.com.br
+date: 12-24-2018
 output:
   radix::radix_article:
     self_contained: false

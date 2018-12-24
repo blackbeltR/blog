@@ -10,7 +10,7 @@ output_dir: "."
 navbar:
   logo:
     image: images/kimono_v1.png
-    href: http://blackbeltR2.netlify.com
+    href: http://www.blackbeltR.com.br
   right:
     - text: "Home"
       href: index.html
@@ -19,7 +19,7 @@ navbar:
     - text: "Idealizadores & Editores"
       href: contributors.html
     - text: "Main Site"
-      href: http://blackbeltR2.netlify.com
+      href: http://www.blackbeltR.com.br
     - icon: fa fa-rss
       href: index.xml
 collections:

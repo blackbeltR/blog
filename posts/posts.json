@@ -1,17 +1,21 @@
 [
   {
     "path": "posts/welcome/",
-    "title": "Welcome to blackbeltR Blog",
-    "description": "Welcome to our new blog, blackbeltR Blog. We hope you enjoy \nreading what we have to say!",
+    "title": "Bem-vindo ao blackbeltR Blog",
+    "description": "Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o \nconteúdo e torne-se um faixa preta em R!",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Allan Quadros",
+        "url": "https://www.blackbeltr.com.br"
+      },
+      {
+        "name": "Pedro Brom",
+        "url": "https://www.blackbeltr.com.br"
       }
     ],
-    "date": "2018-12-19",
+    "date": "2018-12-24",
     "categories": [],
     "preview": {},
-    "last_modified": "2018-12-20T23:04:51-02:00"
+    "last_modified": "2018-12-24T13:28:33-02:00"
   }
 ]
