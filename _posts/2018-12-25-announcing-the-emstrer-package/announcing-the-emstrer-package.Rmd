@@ -1,7 +1,8 @@
 ---
 title: "Announcing the 'emstreeR' package"
 description: |
-  Originally published on https://allanvc.github.io
+  An R package for Fast Computing Euclidean Minimum Spanning Trees.
+  Originally posted on https://allanvc.github.io
 creative_commons: CC BY
 author:
   - name: Allan V. C. Quadros
@@ -18,21 +19,21 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Everyone who is addicted to **R** dreams about making his/her first package. An even bigger dream is to make your package available on CRAN - The Comprehensive R Archive Network.
 
-That being said, I am proud to announce that my first R package, **emstreeR** is available on CRAN since the beginning of December.
+That being said, I am proud to announce my first **R** package: **emstreeR**. It is available on CRAN since the beginning of December 2018.
 
-**emstreeR** is package for fast and easily computing Euclidean Minimum Spanning Trees, using 'mlpack' - the C++ Machine Learning library, which is called on background. **emstreeR** heavily relies on RcppMLPACK and Rcpp, and works as a wrapper, so that R users can benefit from the C++ function for computing an Euclidean Minimum Spanning Tree without actually touching the C++ code. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base' R, 'scatterplot3d' or 'ggplot2' style.
+**emstreeR** is a package for fast and easily computing Euclidean Minimum Spanning Trees. It uses 'mlpack' - the C++ Machine Learning library, which is called on background. **emstreeR** heavily relies on RcppMLPACK and Rcpp, working as a wrapper, so that R users can benefit from the C++ function for computing an Euclidean Minimum Spanning Tree without actually touching the C++ code. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base' R, 'scatterplot3d' or 'ggplot2' style.
 
-Working with **emstreeR** is easy because you just have to pass your matrix or data.frame of points to the main function `computeMST()` in order to things work.
+Working with **emstreeR** is easy because you just have to pass your matrix or data.frame of points to the main function `computeMST()` in order to get things working.
 
-But, before we begin, what exactly is an Minimum Spanning Tree?
+But, before we begin, what exactly is a Minimum Spanning Tree?
 
 In order to explain that, I will try not to bring any graph concept to the discussion.
 
-Imagine you own an airline carrier company that flyes for 10 different cities between Argentina and Brazil. Disregarding other aviation implications (such as the need of always flying in a route that is at a maximum stablished distance of an alternative airport in case of any emergency), you want to know the most efficient flying routes, e.g. the routes that connects all the ten cities with the minimum distance possible. That optimal set of routes is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. The distances between the points can be calculated using several methods, such as Manhattan, Euclidean, Minkowski, etc. In **emstreeR**, we use the most common one: Euclidean distances. Hence the name Euclidean Minimum Spanning Trees.
+Imagine you own an airline carrier company that flyes for 10 different cities between Argentina and Brazil. Disregarding other aviation implications (such as the need of always flying in a route that is at a maximum stablished distance of an alternative airport in case of any emergency), you want to know the most efficient flying routes, e.g. the routes that connects all the ten cities within the minimum distances as possible. That optimal set of routes is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. The distances between the points can be calculated using several methods, such as Manhattan, Euclidean, Minkowski, etc. In **emstreeR**, we use the most common one: Euclidean distances. Hence, the name Euclidean Minimum Spanning Trees.
 
 So, let's try to reproduce the aforementioned example. First, we are going to use the package 'ggmap'. We will pass the cities names and then get the latitude and longitude of those cities.
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, message=FALSE}
 library(ggmap)
 
 ## cities:
@@ -58,7 +59,7 @@ df_location <- cbind(cities_location, geo_location)
 
 Let's plot the map, so we know to where we have to fly:
 
-```{r, preview=FALSE, echo=TRUE, fig.height=4, fig.width=8}
+```{r, preview=FALSE, echo=TRUE, fig.height=4, fig.width=8, message=FALSE}
 # coordinates for South America
 map_grid <- c(left = -75, bottom = -40, right = -30, top = 5) 
 
@@ -71,10 +72,10 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
 ```
 
 
-Now is when **emstreeR** comes in handy. We pass the point columns from the df_location object and it computes the minimum route between the points, or the euclidean minimum spanning tree.
+Now is when **emstreeR** comes in handy. We pass the point columns from the df_location object and it computes the minimum route between the points, e.g. the Euclidean minimum spanning tree.
 
 
-```{r,  echo=TRUE}
+```{r,  echo=TRUE, message=FALSE}
 ## MST:
 library(emstreeR)
 out <- ComputeMST(df_location[,2:3])
@@ -86,7 +87,7 @@ You can silence the output of the algorithm by setting `verbose=FALSE` in `compu
 
 To visualize the result, we plot the map again, but now using the ggplot2's extension provided in **emstreeR**: `stat_MST()`.
 
-```{r, preview=TRUE, fig.height=4, fig.width=8, echo=TRUE}
+```{r, preview=TRUE, fig.height=4, fig.width=8, echo=TRUE, message=FALSE}
 ## Plot:
     
 get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
@@ -97,13 +98,13 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   
 ```
 
-Now that you have the information about the minimum route, depending on the number of planes you have, you can choose the regions and cities each plane will fly to. Clustering is another common application of the Minimum Spanning Tree problem. Nonetheless, let's save that topic for another post.
+Now that you have the information about the minimum route, depending on the number of planes your company has, you can choose the regions and cities each plane will fly to. Clustering is another common application of the Minimum Spanning Tree problem. Nonetheless, let's save that topic for another post.
 
-Below, I will show you another cool examples where **emstreeR** comes in handy.
+Below, I will show you another examples using **emstreeR**.
 
 **emstreeR** has an S3 method to the base R function `plot()`. It is easy to make simple 2D plots with that.
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, message=FALSE}
 ## artifical data for 2D plots:
 set.seed(1984)
 n <- 15
@@ -117,14 +118,14 @@ d <- as.data.frame(d)
 out <- ComputeMST(d, verbose = FALSE)  
 ```
 
-```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE}
+```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE, message=FALSE}
 ## simple 2D plot:
 plot(out, col.pts = "red", col.segts = "blue")
 ```
 
-The `stat_MST()` extension also makes it easy plotting 2D plots in ggplot2 style:
+The `stat_MST()` extension also makes it easy plotting 2D plots in ggplot2's style:
 
-```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE}
+```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE, message=FALSE}
 ## 2D plot with ggplot2:
 library(ggplot2)
 ggplot(data = out, aes(x = x, y = y, from = from, to = to))+ 
@@ -134,7 +135,7 @@ ggplot(data = out, aes(x = x, y = y, from = from, to = to))+
 
 If you want something fancier, you can use the `geom=curve` argument:
 
-```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE}
+```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE, message=FALSE}
 ## 2D plot with ggplot2:
 #library(ggplot2)
 ggplot(data = out, aes(x = x, y = y, from=from, to=to))+ 
@@ -142,11 +143,11 @@ ggplot(data = out, aes(x = x, y = y, from=from, to=to))+
   stat_MST(geom="curve")
 ```
 
-You can also make 3D plots with **emstreeR**. It has a wrapper function to 'scatterplot3D'.
+You can also make 3D plots with **emstreeR**. It has a wrapper to the 'scatterplot3d' function.
 
 Let's create 3D artificial data and compute the MST:
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, message=FALSE}
 ## artificial data for 3D plots:
 n = 99
 set.seed(1984)
@@ -162,14 +163,14 @@ out <- ComputeMST(d, verbose = FALSE)
 
 We can do a simple 3D plot using the function `plotMST3D()`.
 
-```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE}
+```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE, message=FALSE}
 ## simple 3D plot:
 plotMST3D(out, xlab = "xaxis", main="Just a MST 3D plot")
 ```
 
-But if you like fancy things, we can also do some MST 3D plot using plotly:
+But, again, if you prefer fancier plots, we can also do a 3D MST plot using plotly:
 
-```{r, preview=FALSE, fig.height=4, fig.width=8, echo=TRUE}
+```{r, preview=FALSE, fig.height=4, fig.width=8, echo=TRUE, message=FALSE}
 
 # some adjusts needed
 ord_id <- Reduce(rbind, rbind(t(out[, c("from", "to")]), NA))
@@ -189,7 +190,7 @@ plot_ly(showlegend = T) %>%
 ```
 
 
-And that's it ! I hope you enjoy **emstreeR**.
+And that's it! I hope you enjoy **emstreeR**.
 
 * CRAN version: https://cran.r-project.org/package=emstreeR
 * Dev version: https://github.com/allanvc/emstreeR

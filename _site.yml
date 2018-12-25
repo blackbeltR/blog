@@ -24,6 +24,6 @@ navbar:
       href: index.xml
 collections:
   posts:
-    disqus: RDojo
+    disqus: blackbeltr
     share: [twitter, linkedin]
 output: radix::radix_article
