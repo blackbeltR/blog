@@ -1,5 +1,5 @@
 ---
-title: "Announcing the 'emstreeR' package"
+title: "Announcing the new 'emstreeR' package"
 description: |
   An R package for Fast Computing Euclidean Minimum Spanning Trees.
   Originally posted on https://allanvc.github.io
@@ -177,7 +177,7 @@ We can do a simple 3D plot using the function `plotMST3D()`.
 plotMST3D(out, xlab = "xaxis", main="Just a MST 3D plot")
 ```
 
-But, again, if you like fancier plots, we can also make a 3D MST plot using 'plotly':
+But, again, if you like fancier plots, we can also make an interactive 3D MST plot using 'plotly':
 
 ```{r, preview=FALSE, fig.height=4, fig.width=8, echo=TRUE, message=FALSE}
 

@@ -12,7 +12,7 @@ objetivo é formar faixas-pretas em R!
     <generator>Radix</generator>
     <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Announcing the 'emstreeR' package</title>
+      <title>Announcing the new 'emstreeR' package</title>
       <dc:creator>Allan V. C. Quadros</dc:creator>
       <link>https://blackbeltR.github.io/blog/posts/2018-12-25-announcing-the-emstrer-package</link>
       <description>An R package for Fast Computing Euclidean Minimum Spanning Trees.
