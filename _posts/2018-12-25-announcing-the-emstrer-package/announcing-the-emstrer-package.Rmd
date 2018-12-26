@@ -27,7 +27,7 @@ But, before we begin, what exactly is a Minimum Spanning Tree?
 
 In order to explain that, I will try not to bring any graph concept to the discussion.
 
-Imagine you have to connect some South American cities cities with pipelines in order to distribute the crude oil produced in an oil platform in the coast of Rio de Janeiro. To optimize your operations, you need to know the most efficient route, e.g. the route that connects all the ten cities within the minimum distance as possible. That optimal route between the cities is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. 
+Imagine you have to connect a group of South American cities with pipelines in order to distribute the natural gas extracted on an offshore platform on the coast of Rio de Janeiro. To optimize your operations, you need to know the most efficient route, e.g. the route that connects all the cities within the minimum distance as possible. That optimal route between the cities is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. 
 
 The distances between the points can be calculated using several methods, such as Manhattan, Euclidean, Minkowski, etc. In 'emstreeR', we use Euclidean distances. Hence, the name Euclidean Minimum Spanning Trees.
 
@@ -107,7 +107,7 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   
 ```
 
-Once you have the information about the minimum route, it is easy to see that you will have to install oil distribution hubs in cities that will have more than one leaving or arriving link, such as Assuncion in Paraguay. Based on that information or other criteria such as connectivity or even by cutting the largest edge, you can also define or separate regions of operations. What I mean by this is that you can also use Minimum Spanning Trees in clustering problems. Nonetheless, let's save that topic for another post.
+Once you have the information about the minimum route, it is easy to see that you will have to install gas distribution hubs in cities that will have more than one leaving or arriving link, such as Assuncion in Paraguay. Based on that information or other criteria such as connectivity or even by cutting the largest edge, you can also define or separate regions of operations. What I mean by this is that you can also use Minimum Spanning Trees in clustering problems. Nonetheless, let's save that topic for another post.
 
 Below, I will present other things you can do with 'emstreeR'.
 
