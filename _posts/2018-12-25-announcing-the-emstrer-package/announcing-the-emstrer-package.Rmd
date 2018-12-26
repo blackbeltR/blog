@@ -179,7 +179,7 @@ plotMST3D(out, xlab = "xaxis", main="Just a MST 3D plot")
 
 But, again, if you like fancier plots, we can also make an interactive 3D MST plot using 'plotly':
 
-```{r, preview=FALSE, fig.height=4, fig.width=8, echo=TRUE, message=FALSE}
+```{r, preview=FALSE, fig.height=4, fig.width=8, echo=TRUE, message=FALSE, warning=FALSE}
 
 # some adjusts needed
 ord_id <- Reduce(rbind, rbind(t(out[, c("from", "to")]), NA))
