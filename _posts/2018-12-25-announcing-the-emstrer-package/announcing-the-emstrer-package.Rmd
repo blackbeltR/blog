@@ -25,7 +25,7 @@ Working with 'emstreeR' is easy because you just have to pass your matrix or dat
 
 But, before we begin, what exactly is a Minimum Spanning Tree?
 
-In order to explain that, I will try not to bring any graph concept to the discussion.
+I will try to explain that without bringing any graph concept to the discussion.
 
 Imagine you have to connect a group of South American cities with pipelines in order to distribute the natural gas extracted on an offshore platform on the coast of Rio de Janeiro. To optimize your operations, you need to know the most efficient route, e.g. the route that connects all the cities within the minimum distance as possible. That optimal route between the cities is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. 
 
