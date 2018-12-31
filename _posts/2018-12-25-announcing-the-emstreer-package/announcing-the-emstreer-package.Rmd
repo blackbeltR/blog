@@ -19,21 +19,21 @@ knitr::opts_chunk$set(echo = FALSE)
 
 I am proud to announce **emstreeR** - my first **R** package that is available on CRAN since the beginning of December 2018.
 
-'emstreeR' is a package for fast and easily computing Euclidean Minimum Spanning Trees. It uses 'mlpack' - the C++ Machine Learning library, which is called on background. 'emstreeR' works as a wrapper, so that R users can benefit from the C++ function for computing an Euclidean Minimum Spanning Tree without actually touching the C++ code. This is only possible because 'emstreeR' heavily relies on RcppMLPACK and Rcpp. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base', 'scatterplot3d' or 'ggplot2' style.
+'emstreeR' is a package for fast and easily computing Euclidean Minimum Spanning Trees (EMST). It heavily relies on RcppMLPACK and Rcpp to work as wrapper to the EMST Dual-Tree Boruvka algorithm available in 'mlpack' - the C++ Machine Learning library. 'emstreeR' allow R users to benefit from the EMST C++ function without having to deal with the R/Rcpp/C++ integration. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base', 'scatterplot3d' or 'ggplot2' style.
 
-Working with 'emstreeR' is easy because you just have to pass your matrix or data.frame of points to the main function `computeMST()` in order to get things working.
+Working with 'emstreeR' is easy because you just have to pass a matrix or data.frame of points as an argument to the main function `computeMST()` in order to get things working.
 
 But, before we begin, what exactly is a Minimum Spanning Tree?
 
 I will try to explain that without bringing any graph concept to the discussion.
 
-Imagine you have to connect a group of South American cities with pipelines in order to distribute the natural gas extracted on an offshore platform on the coast of Rio de Janeiro. To optimize your operations, you need to know the most efficient route, e.g. the route that connects all the cities within the minimum distance as possible. That optimal route between the cities is a Minimum Spanning Tree. Therefore, the Minimum Spanning Tree problem is, in its essence, an optimization problem. 
+Imagine you have to connect a group of South American cities with pipelines in order to distribute the natural gas extracted from an offshore platform on the coast of Rio de Janeiro. To optimize your operations, you need to know the most efficient route, e.g. the route that connects all the cities within the minimum distance possible. That optimal route between the cities is a Minimum Spanning Tree. Therefore, the MST problem is, in its essence, an optimization problem. 
 
-The distances between the points can be calculated using several methods, such as Manhattan, Euclidean, Minkowski, etc. In 'emstreeR', we use Euclidean distances. Hence, the name Euclidean Minimum Spanning Trees.
+The distances between the points can be calculated using various methods, such as Manhattan, Euclidean, Minkowski, etc. 'emstreeR' uses Euclidean distances. Hence, the name Euclidean Minimum Spanning Trees.
 
 So, let's try to reproduce the aforementioned example. 
 
-First, we are going to use the package 'ggmap'. We will pass the cities names and then get their latitude and longitude coordinates.
+First, we are going to use the package 'ggmap'. We will pass the cities names as arguments and then get their latitude and longitude coordinates, using the Data Science Toolkit repository (`source = "dsk"`).
 
 ```{r, echo=TRUE, message=FALSE}
 library(ggmap)
@@ -79,7 +79,7 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
 ```
 
 
-Now is when **emstreeR** comes in handy. We pass the point columns from the df_location object and it computes the minimum route connecting all the points, e.g. the Euclidean minimum spanning tree.
+Now is when **emstreeR** comes in handy. We pass the point columns as the argument to `computeMST()` and it calculates the minimum route connecting all the points, e.g. the Euclidean minimum spanning tree.
 
 
 ```{r,  echo=TRUE, message=FALSE}
