@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-I am proud to announce **emstreeR** - my first **R** package that is available on CRAN since the beginning of December 2018.
+I am proud to announce **emstreeR** - my first **R** package that is available on CRAN since December 3rd, 2018.
 
 'emstreeR' is a package for fast and easily computing Euclidean Minimum Spanning Trees (EMST). It heavily relies on RcppMLPACK and Rcpp to work as wrapper to the EMST Dual-Tree Boruvka algorithm available in 'mlpack' - the C++ Machine Learning library. 'emstreeR' allow R users to benefit from the EMST C++ function without having to deal with the R/Rcpp/C++ integration. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base', 'scatterplot3d' or 'ggplot2' style.
 
@@ -203,3 +203,16 @@ And that's it! I hope you enjoy **emstreeR**.
 
 * CRAN version: https://cran.r-project.org/package=emstreeR
 * Dev version: https://github.com/allanvc/emstreeR
+
+---
+
+### References
+
+Curtin, R. R. et al. (2005). Mlpack: A scalable C++ machine learning 
+library. \emph{Journal of Machine Learning Research}, v. 14, 2013. 
+doi:10.1145/1835804.1835882.
+
+March, W. B., and Ram, P., and Gray, A. G. (2010). \emph{Fast euclidian minimum 
+spanning tree: algorithm analysis, and applications}. 16th ACM SIGKDD 
+International Conference on Knowledge Discovery and Data mining, July 
+25-28 2010. Washington, DC, USA. doi:10.21105/joss.00726.
