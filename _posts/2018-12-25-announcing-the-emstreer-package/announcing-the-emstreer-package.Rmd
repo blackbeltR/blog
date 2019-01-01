@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-I am proud to announce **emstreeR** - my first **R** package that is available on CRAN since December 3rd, 2018.
+I am proud to announce **emstreeR** - my first **R** package that is available on CRAN since  December 3rd, 2018.
 
 **emstreeR** is a package for fast and easily computing Euclidean Minimum Spanning Trees (EMST). It heavily relies on RcppMLPACK and Rcpp to work as wrapper to the EMST Dual-Tree Boruvka algorithm (March, Ram, Gray, 2010) implemented in 'mlpack' - the C++ Machine Learning library (Curtin, 2005). With 'emstreeR', R users have access to the C++ fast EMST algorithm without having to deal with the R-Rcpp-C++ integration. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base', 'scatterplot3d' or 'ggplot2' style.
 
@@ -79,7 +79,7 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
 ```
 
 
-Now is when **emstreeR** comes in handy. We pass the point columns as the argument to `computeMST()` and it calculates the minimum route connecting all the points, e.g. the Euclidean minimum spanning tree.
+Now is when **emstreeR** comes in handy. We pass the point columns as the argument to `computeMST()` and it calculates the minimum route connecting all the points, e.g. the Euclidean Minimum Spanning Tree.
 
 
 ```{r,  echo=TRUE, message=FALSE}
@@ -107,7 +107,7 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   
 ```
 
-Once you have the information about the minimum route, it is easy to see that you will have to install gas distribution hubs in cities that will have more than two leaving or arriving links, such as Assuncion in Paraguay. Based on that information or other criteria such as connectivity or even by cutting the largest edge, you can also define or separate regions of operations. What I mean by this is that you can also use Minimum Spanning Trees in clustering problems. Nonetheless, let's save that topic for another post.
+Once you have the information about the minimum route, it is easy to see that you will have to install gas distribution hubs in cities that will have more than two incoming or outgoing links, such as Assuncion in Paraguay. Based on that information or other criteria such as connectivity or even by cutting the largest edge, you can also define or separate regions of operations. What I mean by this is that you can also use Minimum Spanning Trees in clustering problems. Nonetheless, let's save that topic for another post.
 
 Below, I will present other things you can do with 'emstreeR'.
 
@@ -132,7 +132,7 @@ out <- ComputeMST(d, verbose = FALSE)
 plot(out, col.pts = "red", col.segts = "blue")
 ```
 
-The `stat_MST()` extension also makes it easy plotting 2D plots, but in ggplot2 style:
+The `stat_MST()` extension also makes it easy plotting 2D plots, but using 'ggplot2' as we showed before.
 
 ```{r, preview=FALSE, fig.height=5, fig.width=7, echo=TRUE, message=FALSE}
 ## 2D plot with ggplot2:
