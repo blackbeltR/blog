@@ -989,14 +989,14 @@
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
- [1] &quot;2 hours ago&quot;  &quot;4 hours ago&quot;  &quot;2 hours ago&quot;  &quot;today&quot;       
- [5] &quot;today&quot;        &quot;one hour ago&quot; &quot;2 hours ago&quot;  &quot;4 hours ago&quot; 
+ [1] &quot;one hour ago&quot; &quot;one hour ago&quot; &quot;2 hours ago&quot;  &quot;today&quot;       
+ [5] &quot;today&quot;        &quot;2 hours ago&quot;  &quot;3 hours ago&quot;  &quot;4 hours ago&quot; 
  [9] &quot;today&quot;        &quot;one hour ago&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
- [1] &quot;The &#39;lonely&#39; President: How Trump spent his Christmas vacation&quot;                                           
- [2] &quot;Trump tells congressional leaders to return Friday, after border security sit-down in Situation Room&quot;     
+ [1] &quot;Pelosi says Democrats will give &#39;nothing for the wall&#39;&quot;                                                   
+ [2] &quot;No deal to end shutdown; Trump says &#39;could be a long time&#39;&quot;                                               
  [3] &quot;Trump falsely claims Mexico is paying for wall, demands taxpayer money for wall in meeting with Democrats&quot;
  [4] &quot;Trump’s Shutdown Is Not About Border Security&quot;                                                            
  [5] &quot;Doug Schoen: Democrats have Trump backed into a corner as 2019 kicks off&quot;                                 
@@ -1007,7 +1007,7 @@
 [10] &quot;Mitt Romney vs. Donald Trump: If Utah’s New Senator Is Serious, He Should Be Running for President&quot;       </code></pre>
 </div>
 <p>In this last case we used a regular expression (REGEX) to clean up the data. We did this by separating the actual headline phrases from the complementary ones. In some cases, we have a phrase ending with uppercase letters such as “NSA” (The National Security Agency) collapsed with other phrase initiating with another uppercase letter such as the article “A” (“…with NSAA agent said…”) for example. We have to think of a better way to split these cases, but the current result is quite satisfactory for now.</p>
-<p>The expression <code>?&lt;=</code> is called “lookbehind”, while <code>?=</code> is called “lookahead”. Those “lookaround” expressions allow us to look for patterns followed or preceded by something. In our case, the idea is to separate a string at the point in which lowercase letters, numbers, exclamation points, dots or question marks are collapsed with uppercase letters , e.g. where lowercase letters, numbers and others (<code>[a-z0-9'!?\\.]</code>) are followed (<code>?&lt;=</code>) by uppercase letters or where uppercase letters (<code>[A-Z]</code>) are preceded (<code>?=</code>) by lowercase letters.</p>
+<p>The expression <code>?&lt;=</code> is called “lookbehind”, while <code>?=</code> is called “lookahead”. Those “lookaround” expressions allow us to look for patterns followed or preceded by something. In our case, the idea is to separate a string at the point in which lowercase letters, numbers, exclamation points, periods or question marks are collapsed with uppercase letters , e.g. where lowercase letters, numbers and others (<code>[a-z0-9'!?\\.]</code>) are followed (<code>?&lt;=</code>) by uppercase letters or where uppercase letters (<code>[A-Z]</code>) are preceded (<code>?=</code>) by lowercase letters.</p>
 <p>Before we finish, we have to clean up our data. It is common to collect garbage in the process such as data related to “fact checking”, which is a section on the right side of the page. As a result, it is possible that the three vectors we have created may have different sizes. Therefore, we use the smallest of them as the base and just delete the entries above this number on the other two vectors.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1015,20 +1015,20 @@
 <p>And we have our final data frame:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
-# A tibble: 174 x 3
+# A tibble: 158 x 3
    vehicle_all     time_all   headline_all                           
    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;                                  
- 1 CNN             2 hours a… The &#39;lonely&#39; President: How Trump spen…
- 2 Fox News        4 hours a… Trump tells congressional leaders to r…
+ 1 CNN             one hour … Pelosi says Democrats will give &#39;nothi…
+ 2 Fox News        one hour … No deal to end shutdown; Trump says &#39;c…
  3 The Washington… 2 hours a… Trump falsely claims Mexico is paying …
  4 The New York T… today      Trump’s Shutdown Is Not About Border S…
  5 Opinion         today      Doug Schoen: Democrats have Trump back…
- 6 Opinion         one hour … Mitt Romney Pledges Support For Border…
- 7 Fox News        2 hours a… Mitt Romney details what bothers him a…
+ 6 Opinion         2 hours a… Mitt Romney Pledges Support For Border…
+ 7 Fox News        3 hours a… Mitt Romney details what bothers him a…
  8 Opinion         4 hours a… Trump fires back at Mitt Romney for sc…
  9 Opinion         today      Mitt Romney’s Counterproductive Op-Ed  
 10 HuffPost        one hour … Mitt Romney vs. Donald Trump: If Utah’…
-# ... with 164 more rows</code></pre>
+# ... with 148 more rows</code></pre>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
