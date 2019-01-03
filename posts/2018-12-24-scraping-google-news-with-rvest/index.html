@@ -1356,32 +1356,32 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
- [1] &quot;CNN&quot;                 &quot;Daily Mail&quot;          &quot;Fox News&quot;           
- [4] &quot;National Review&quot;     &quot;Opinion&quot;             &quot;Opinion&quot;            
- [7] &quot;The Washington Post&quot; &quot;Opinion&quot;             &quot;Opinion&quot;            
-[10] &quot;Fox News&quot;           </code></pre>
+ [1] &quot;CNN&quot;                 &quot;Fox News&quot;            &quot;The Washington Post&quot;
+ [4] &quot;The New York Times&quot;  &quot;Opinion&quot;             &quot;Opinion&quot;            
+ [7] &quot;Fox News&quot;            &quot;Opinion&quot;             &quot;Opinion&quot;            
+[10] &quot;HuffPost&quot;           </code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
- [1] &quot;4 hours ago&quot;  &quot;3 hours ago&quot;  &quot;today&quot;        &quot;3 hours ago&quot; 
- [5] &quot;one hour ago&quot; &quot;one hour ago&quot; &quot;one hour ago&quot; &quot;one hour ago&quot;
- [9] &quot;one hour ago&quot; &quot;2 hours ago&quot; </code></pre>
+ [1] &quot;2 hours ago&quot;  &quot;4 hours ago&quot;  &quot;2 hours ago&quot;  &quot;today&quot;       
+ [5] &quot;today&quot;        &quot;one hour ago&quot; &quot;2 hours ago&quot;  &quot;4 hours ago&quot; 
+ [9] &quot;today&quot;        &quot;one hour ago&quot;</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
- [1] &quot;Trump fires back at Mitt Romney for scathing op-ed&quot;                                                             
- [2] &quot;Mitt is back: Romney cruises to easy senate win in Utah&quot;                                                        
- [3] &quot;Mitt Romney rebuked by niece and GOP boss Ronna Mc&quot;                                                             
- [4] &quot;Mitt Romney’s Counterproductive Op-Ed&quot;                                                                          
- [5] &quot;Let’s hope Mitt Romney can give the GOP some backbone&quot;                                                          
- [6] &quot;Shutdown Day 12: Lawmakers to hear wall plea at White House&quot;                                                    
- [7] &quot;Trump falsely claims Mexico is paying for wall, demands taxpayer money for wall ahead of meeting with Democrats&quot;
- [8] &quot;Trump to Meet Congressional Leaders as Shutdown Stretches On&quot;                                                   
- [9] &quot;Doug Schoen: Democrats have Trump backed into a corner as 2019 kicks off&quot;                                       
-[10] &quot;President Trump and Democrats need to strike a deal on the &#39;wall&#39; | The&quot;                                        </code></pre>
+ [1] &quot;The &#39;lonely&#39; President: How Trump spent his Christmas vacation&quot;                                           
+ [2] &quot;Trump tells congressional leaders to return Friday, after border security sit-down in Situation Room&quot;     
+ [3] &quot;Trump falsely claims Mexico is paying for wall, demands taxpayer money for wall in meeting with Democrats&quot;
+ [4] &quot;Trump’s Shutdown Is Not About Border Security&quot;                                                            
+ [5] &quot;Doug Schoen: Democrats have Trump backed into a corner as 2019 kicks off&quot;                                 
+ [6] &quot;Mitt Romney Pledges Support For Border Wall After Slamming Trump Administration&quot;                          
+ [7] &quot;Mitt Romney details what bothers him about Trumpvideo_youtube&quot;                                            
+ [8] &quot;Trump fires back at Mitt Romney for scathing op-ed&quot;                                                       
+ [9] &quot;Mitt Romney’s Counterproductive Op-Ed&quot;                                                                    
+[10] &quot;Mitt Romney vs. Donald Trump: If Utah’s New Senator Is Serious, He Should Be Running for President&quot;       </code></pre>
 </div>
-<p>In this last case we used a regular expression (REGEX) to clean up the data. We did this by separating the actual headline phrases from the complementary ones. In some cases, we have a phrase ending with uppercase letters such as “NSA” (a Brazilian state) collapsed with other phrase initiating with another uppercase letter such as the word “A” (“…with NSAA agent said…”) for example. We have to think of a better way to split these cases, but the current result is quite satisfactory for now.</p>
-<p>The expression <code>?&lt;=</code> is called “lookbehind”, while <code>?=</code> is called “lookahead”. Those “lookaround” expressions allow us to look for patterns followed or preceded by something. In our case, the idea is basically to separate a string at the point in which lowercase letters, numbers, exclamation points or question marks (<code>[a-z0-9!?]</code>) are collapsed with uppercase letters (<code>[A-Z]</code>), e.g. where lowercase letters, numbers and others are preceded (<code>?&lt;=</code>) by uppercase letters.</p>
+<p>In this last case we used a regular expression (REGEX) to clean up the data. We did this by separating the actual headline phrases from the complementary ones. In some cases, we have a phrase ending with uppercase letters such as “NSA” (The National Security Agency) collapsed with other phrase initiating with another uppercase letter such as the article “A” (“…with NSAA agent said…”) for example. We have to think of a better way to split these cases, but the current result is quite satisfactory for now.</p>
+<p>The expression <code>?&lt;=</code> is called “lookbehind”, while <code>?=</code> is called “lookahead”. Those “lookaround” expressions allow us to look for patterns followed or preceded by something. In our case, the idea is to separate a string at the point in which lowercase letters, numbers, exclamation points, dots or question marks are collapsed with uppercase letters , e.g. where lowercase letters, numbers and others (<code>[a-z0-9'!?\\.]</code>) are followed (<code>?&lt;=</code>) by uppercase letters or where uppercase letters (<code>[A-Z]</code>) are preceded (<code>?=</code>) by lowercase letters.</p>
 <p>Before we finish, we have to clean up our data. It is common to collect garbage in the process such as data related to “fact checking”, which is a section on the right side of the page. As a result, it is possible that the three vectors we have created may have different sizes. Therefore, we use the smallest of them as the base and just delete the entries above this number on the other two vectors.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1389,20 +1389,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>And we have our final data frame:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
-# A tibble: 161 x 3
+# A tibble: 174 x 3
    vehicle_all     time_all   headline_all                           
    &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;                                  
- 1 CNN             4 hours a… Trump fires back at Mitt Romney for sc…
- 2 Daily Mail      3 hours a… Mitt is back: Romney cruises to easy s…
- 3 Fox News        today      Mitt Romney rebuked by niece and GOP b…
- 4 National Review 3 hours a… Mitt Romney’s Counterproductive Op-Ed  
- 5 Opinion         one hour … Let’s hope Mitt Romney can give the GO…
- 6 Opinion         one hour … Shutdown Day 12: Lawmakers to hear wal…
- 7 The Washington… one hour … Trump falsely claims Mexico is paying …
- 8 Opinion         one hour … Trump to Meet Congressional Leaders as…
- 9 Opinion         one hour … Doug Schoen: Democrats have Trump back…
-10 Fox News        2 hours a… President Trump and Democrats need to …
-# ... with 151 more rows</code></pre>
+ 1 CNN             2 hours a… The &#39;lonely&#39; President: How Trump spen…
+ 2 Fox News        4 hours a… Trump tells congressional leaders to r…
+ 3 The Washington… 2 hours a… Trump falsely claims Mexico is paying …
+ 4 The New York T… today      Trump’s Shutdown Is Not About Border S…
+ 5 Opinion         today      Doug Schoen: Democrats have Trump back…
+ 6 Opinion         one hour … Mitt Romney Pledges Support For Border…
+ 7 Fox News        2 hours a… Mitt Romney details what bothers him a…
+ 8 Opinion         4 hours a… Trump fires back at Mitt Romney for sc…
+ 9 Opinion         today      Mitt Romney’s Counterproductive Op-Ed  
+10 HuffPost        one hour … Mitt Romney vs. Donald Trump: If Utah’…
+# ... with 164 more rows</code></pre>
 </div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">

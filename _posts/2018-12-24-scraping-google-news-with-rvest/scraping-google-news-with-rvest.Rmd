@@ -81,7 +81,8 @@ time_all[1:10] # take a look at the first ten
 # extracting the headlines
 # and using stringr for cleaning
 headline_all <- google %>% html_nodes("article") %>% html_text("span") %>%
-  str_split("(?<=[a-z0-9'!?\\.])(?=[A-Z])")
+  str_split("(?<=[a-z0-9!?\\.])(?=[A-Z])")
+  # str_split("(?<=[a-z0-9áéíóú!?\\.])(?=[A-Z])") # for Google News in Portuguese
 
 headline_all <- sapply(headline_all, function(x) x[1]) # extract only the first elements
 
@@ -89,9 +90,9 @@ headline_all <- sapply(headline_all, function(x) x[1]) # extract only the first 
 headline_all[1:10] # take a look at the first ten
 ```
 
-In this last case we used a regular expression (REGEX) to clean up the data. We did this by separating the actual headline phrases from the complementary ones. In some cases, we have a phrase ending with uppercase letters such as "NSA" (a Brazilian state) collapsed with other phrase initiating with another uppercase letter such as the word "A" ("...with NSAA agent said...") for example. We have to think of a better way to split these cases, but the current result is quite satisfactory for now. 
+In this last case we used a regular expression (REGEX) to clean up the data. We did this by separating the actual headline phrases from the complementary ones. In some cases, we have a phrase ending with uppercase letters such as "NSA" (The National Security Agency) collapsed with other phrase initiating with another uppercase letter such as the article "A" ("...with NSAA agent said...") for example. We have to think of a better way to split these cases, but the current result is quite satisfactory for now. 
 
-The expression `?<=` is called "lookbehind", while `?=` is called "lookahead". Those "lookaround" expressions allow us to look for patterns followed or preceded by something. In our case, the idea is basically to separate a string at the point in which lowercase letters, numbers, exclamation points or question marks (`[a-z0-9!?]`) are collapsed with uppercase letters (`[A-Z]`), e.g. where lowercase letters, numbers and others are preceded (`?<=`) by uppercase letters.
+The expression `?<=` is called "lookbehind", while `?=` is called "lookahead". Those "lookaround" expressions allow us to look for patterns followed or preceded by something. In our case, the idea is to separate a string at the point in which lowercase letters, numbers, exclamation points, dots or question marks are collapsed with uppercase letters , e.g. where lowercase letters, numbers and others  (`[a-z0-9'!?\\.]`) are followed (`?<=`) by uppercase letters or where uppercase letters (`[A-Z]`) are preceded (`?=`) by lowercase letters.
 
 Before we finish, we have to clean up our data. It is common to collect garbage in the process such as data related to "fact checking", which is a section on the right side of the page. As a result, it is possible that the three vectors we have created may have different sizes. Therefore, we use the smallest of them as the base and just delete the entries above this number on the other two vectors.
 
