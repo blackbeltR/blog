@@ -10,7 +10,16 @@ os próprios usuários possam contribuir com posts em nível acadêmico. Nosso
 objetivo é formar faixas-pretas em R!
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>ter, 08 jan 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Jogos de tabuleiro em números</title>
+      <dc:creator>Eduardo Ochetski Hellas</dc:creator>
+      <link>https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros</link>
+      <description>Estatísticas de jogos de tabuleiro modernos, publicado originalmente em https://pinduzera.github.io/</description>
+      <guid>https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros</guid>
+      <pubDate>ter, 08 jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros/jogos-de-tabuleiro-em-nmeros_files/figure-html5/lancamentos-1.png" medium="image" type="image/png" width="1152" height="960"/>
+    </item>
     <item>
       <title>Announcing the new 'emstreeR' package</title>
       <dc:creator>Allan V. C. Quadros</dc:creator>
@@ -18,7 +27,7 @@ objetivo é formar faixas-pretas em R!
       <description>An R package for Fast Computing Euclidean Minimum Spanning Trees.
 Originally posted on https://allanvc.github.io</description>
       <guid>https://blackbeltR.github.io/blog/posts/2018-12-25-announcing-the-emstreer-package</guid>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>ter, 25 dez 2018 00:00:00 +0000</pubDate>
       <media:content url="https://blackbeltR.github.io/blog/posts/2018-12-25-announcing-the-emstreer-package/announcing-the-emstreer-package_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1536" height="960"/>
     </item>
     <item>
@@ -28,7 +37,7 @@ Originally posted on https://allanvc.github.io</description>
       <description>This is an example of how to scrape Google News website with the awesome rvest package.
 Originally posted on https://allanvc.github.io.</description>
       <guid>https://blackbeltR.github.io/blog/posts/2018-12-24-scraping-google-news-with-rvest</guid>
-      <pubDate>Mon, 24 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>seg, 24 dez 2018 00:00:00 +0000</pubDate>
       <media:content url="https://blackbeltR.github.io/blog/posts/2018-12-24-scraping-google-news-with-rvest/./img/google_news_screenshot.png" medium="image" type="image/png" width="1920" height="1080"/>
     </item>
     <item>
@@ -39,7 +48,7 @@ Originally posted on https://allanvc.github.io.</description>
       <description>Bem-vindo ao nosso blog, blackbeltR Blog. Esperamos que você aproveite o 
 conteúdo e torne-se um faixa preta em R!</description>
       <guid>https://blackbeltR.github.io/blog/posts/welcome</guid>
-      <pubDate>Mon, 24 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>seg, 24 dez 2018 00:00:00 +0000</pubDate>
       <media:content url="https://blackbeltR.github.io/blog/posts/welcome/./img/kimono_v1.png" medium="image" type="image/png" width="861" height="836"/>
     </item>
   </channel>
