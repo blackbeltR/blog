@@ -10,7 +10,15 @@ os próprios usuários possam contribuir com posts em nível acadêmico. Nosso
 objetivo é formar faixas-pretas em R!
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>ter, 08 jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>qua, 09 jan 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Comprimindo PDFs com R</title>
+      <dc:creator>Pedro Carvalho Brom</dc:creator>
+      <link>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</link>
+      <description>Como usar o poder do Linux combinado com o R para comprimir PDFs</description>
+      <guid>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</guid>
+      <pubDate>qua, 09 jan 2019 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Jogos de tabuleiro em números</title>
       <dc:creator>Eduardo Ochetski Hellas</dc:creator>
@@ -19,14 +27,6 @@ objetivo é formar faixas-pretas em R!
       <guid>https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros</guid>
       <pubDate>ter, 08 jan 2019 00:00:00 +0000</pubDate>
       <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros/jogos-de-tabuleiro-em-nmeros_files/figure-html5/lancamentos-1.png" medium="image" type="image/png" width="1152" height="960"/>
-    </item>
-    <item>
-      <title>Comprimindo PDFs com R</title>
-      <dc:creator>Pedro Carvalho Brom</dc:creator>
-      <link>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</link>
-      <description>Como usar o poder do Linux combinado com o R para comprimir PDFs</description>
-      <guid>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</guid>
-      <pubDate>ter, 08 jan 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Announcing the new 'emstreeR' package</title>
