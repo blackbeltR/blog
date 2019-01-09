@@ -21,6 +21,14 @@ objetivo é formar faixas-pretas em R!
       <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-08-jogos-de-tabuleiro-em-nmeros/jogos-de-tabuleiro-em-nmeros_files/figure-html5/lancamentos-1.png" medium="image" type="image/png" width="1152" height="960"/>
     </item>
     <item>
+      <title>Comprimindo PDFs com R</title>
+      <dc:creator>Pedro Carvalho Brom</dc:creator>
+      <link>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</link>
+      <description>Como usar o poder do Linux combinado com o R para comprimir PDFs</description>
+      <guid>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</guid>
+      <pubDate>ter, 08 jan 2019 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>Announcing the new 'emstreeR' package</title>
       <dc:creator>Allan V. C. Quadros</dc:creator>
       <link>https://blackbeltR.github.io/blog/posts/2018-12-25-announcing-the-emstreer-package</link>
