@@ -1,0 +1,132 @@
+---
+title: "Comprimindo PDFs com R"
+description: "Como usar o poder do Linux combinado com o R para comprimir PDFs"
+author:
+  - name: Pedro Carvalho Brom
+    url: http://blackbeltr.com.br/
+date: "`r Sys.Date()`"
+output:
+  radix::radix_article:
+    self_contained: false
+tags: ["linux", "r", "comprimir", "pdf"]
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Como comprimir seus PDFs usando o R
+
+Esta é uma das primeiras postagens do blog então considero que a economia de espaço é a primeira etapa para ter um sistema limpo e eficiente.
+
+Aviso antecipadamente que tudo neste blog é escrito e direcionado para sistemas UNIX Like. Portanto se você ainda sofre com o Windows então é uma boa hora para reavaliar seus conceitos.
+
+Na minha máquina (MadMax) reduzi de 6.5GB para 5.4GB.
+
+### Listando os documentos de sua máquina
+
+Criaremos dois espelhos para depois da conversão comparar os arquivos que são mais eficientes. Considere por exemplo que desejamos comprimir somente uma biblioteca virtual dentro da pasta Livros. Então,
+
+* Crie duas cópias idênticas da pasta Livros para Livros1 e Livros2;
+* Entre na pasta Livros1;
+* Use o comando **find**.
+
+O procedimento consiste em usar o comando **find** diretamente no terminal e criar um arquivo com todos os endereços dos PDFs. É necessário usar modo sudo para listar os arquivos. 
+
+No terminal execute:
+
+```{r,eval=FALSE}
+cd Livros1
+sudo find -iname '*.pdf' > '~/lista1.txt'
+```
+
+Lista pronta. Hora de ir para o R.
+
+Criaremos o objeto lista que recebe os endereços e após importação montamos um data frame que informa o tamanho de cada arquivo.
+
+```{r,eval=FALSE}
+# criando o data frame
+lista = readLines("lista1.txt")
+lista = gsub("./", "/", lista, fixed = T)
+lista = paste0("~/Livros1", lista)
+lista = cbind.data.frame(lista, file.size(lista))
+names(lista) = c("end", "tam_ori")
+lista$end = as.character(lista$end)
+lista$tam_ori = as.numeric(lista$tam_ori)
+
+# verificando o espaco ocupado dos arquivos sem conversao
+tam_ori = sum(lista$tam_ori)
+```
+
+### Hora de compactar
+
+O comando **ps2pdf** converterá os arquivos em um formato otimizado. Pode ser que o arquivo original contenha apenas imagens então, em alguns casos, o arquivo final chega a ser maior. Em geral os arquivos ficam absurdamente menores. Por exemplo, um arquivo de 1.3MB pode ficar com alguns centavos de KB sem perder a qualidade de impressão.
+
+Recomendo a instalação do pacote **doSNOW** para processamento em paralelo.
+
+```{r,eval=FALSE}
+# criando o vetor com as linhas de comando que serao chamadas no terminal
+comando = paste0("ps2pdf ", "'", lista$end, "' ", "'", lista_saida, "'")
+
+# chamando o pacote
+require(doSNOW)
+
+# detectando a quantidade de cores da sua maquina e criandos os clusters de trabalho
+cores = parallel::detectCores()
+cl = makeSOCKcluster(cores)
+registerDoSNOW(cl)
+
+# criando uma barra de progresso
+pb = txtProgressBar(min = 1, max = length(comando), style = 3)
+progress = function(n) setTxtProgressBar(pb, n)
+opts = list(progress = progress)
+
+# loop
+foreach(i = 1:length(comando), .options.snow = opts) %dopar% {
+  system(comando[i], minimized = T)
+}
+
+# fechando o processo da barra de progresso e os clusters
+close(pb)
+stopCluster(cl)
+```
+
+### Comparando os novos arquivos com os originais
+
+Novamente no terminal, execute:
+
+```{r,eval=FALSE}
+sudo find -iname '*.pdf' > '~/lista2.txt'
+```
+
+Neste momento criamos uma lista no estilo da anterior, mas para a pasta dos arquivos modificados.
+
+O próximo passo é comparar, um por vez, se os novos arquivos são menores que os originais. Caso seja, copie o modificado (Livros2) para o local respectivo local em Livros1
+
+```{r,eval=FALSE}
+# criando o data frame dos arquivos modificados
+lista2 = readLines("lista2.txt")
+lista2 =   gsub("./", "/", lista2, fixed = T)
+lista2 = paste0("~/Livros2", lista2)
+lista2 = cbind.data.frame(lista2, file.size(lista2))
+names(lista2) = c("end", "tam_ori")
+lista2$end = as.character(lista2$end)
+lista2$tam_ori = as.numeric(lista2$tam_ori)
+
+# verificando e substituindo os que forem menores de Livros2 em Livros1
+for (i in 1:nrow(lista2)) {
+  if(lista$tam_ori[i] > lista2$tam_ori[i]) {
+    cmd = paste0("cp ", "'", lista2$end[i], "'", " ", "'", lista$end[i], "'")
+    system(cmd)
+  }
+}
+
+# verificando a taxa de compressao
+tam_pro = sum(lista$tam_ori)
+1 - tam_pro/tam_ori # 0.1742683
+```
+
+### Colocando a casa em ordem
+
+Agora você pode copiar os arquivos de Livros1 para a pasta original de Livros, depois deletar Livros1 e Livros2. Simples assim. 
