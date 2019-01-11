@@ -2326,9 +2326,159 @@ distill-header .nav a {
 </div>
 
 <div class="d-article">
-<p><a href="http://mercadolivre.com.br/" target="blank_">Mercado Livre (ML)</a> é um local “onde se compra e vende de tudo”. Outro dia meu notebook deu problema da abertura da tela e não tinha mais como ficar abrindo e fechando então o transformei em uma estação de mídia da minha casa (i3 com 8GB de ram), usando o <a href="https://linuxmint.com/" target="blank_">Linux Mint MATE 19</a> instalei o <a href="https://www.stremio.com/br/" target="blank_">Stremio</a> (Fica a dica).</p>
+<p><a href="http://mercadolivre.com.br/" target="blank_">Mercado Livre (ML)</a> é um local “onde se compra e vende de tudo”. Outro dia meu notebook deu problema da abertura da tela e não tinha mais como ficar abrindo e fechando então o transformei em uma estação de mídia da minha casa (i3 com 8GB de ram), usando o <a href="https://linuxmint.com/" target="blank_">Linux Mint MATE 19</a> e instalei o <a href="https://www.stremio.com/br/" target="blank_">Stremio</a> (Fica a dica).</p>
 <p>Voltando ao ponto do ML. O note deu problema e tive que fazer uma pesquisa para avaliar os preços e saber se o que o vendedor está cobrando está acima ou abaixo do mercado, mas fiquei com preguiça (sim essa é uma habilidade dos programadores) de fazer um trabalho manual então resolvi abrir o RStudio e botar a mão na massa, mais ou menos uns 30 minutos depois depois cheguei neste script abaixo.</p>
 <p>Depois foi simples garimpar os dados de modo mais eficiente. Façam os testes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+require(rvest) # para raspargem de dados
+require(dplyr) # para uso de pipes
+require(doSNOW) # processamento em paralelo
+
+# TERMO DE BUSCA --------------------------------------------------------------
+termo = &quot;lenovo thinkpad e470&quot; # adicione o termo de busca
+
+# funcao para criar padrao das urls -------------------------------------------------------
+get_url = function(termo) {
+  # prefixos da url
+  p1 = &quot;https://lista.mercadolivre.com.br/%5B&quot;
+  p2 = termo %&gt;% strsplit(., &quot; &quot;) %&gt;% unlist() %&gt;% paste0(., collapse = &quot;-&quot;)
+  p3 = &quot;%5D_Desde_&quot;
+  p4 = paste0(0, 1)
+  p5 = &quot;_DisplayType_LF&quot;
+  
+  # juntando tudo
+  y = paste0(p1, p2, p3, p4)
+  qtd = read_html(y) %&gt;%
+    html_nodes(&quot;aside div&quot;) %&gt;% 
+    html_text() %&gt;% 
+    {.[grepl(&quot;(resultados)$&quot;, .)]} %&gt;% 
+    gsub(&quot;\\D&quot;, &quot;&quot;, .) %&gt;% 
+    as.numeric() %&gt;% 
+    {./50} %&gt;% 
+    ceiling() %&gt;% 
+    {1:.}
+  p4 = paste0((qtd - 1) * 5, 1)
+  y = paste0(p1, p2, p3, p4, p5)
+  return(y)
+}
+
+# chamando url padrao para o termo de busca
+URLs = get_url(termo)
+
+# imprimindo as primeiras entradas
+paste0(length(URLs), &quot; página(s) de produtos&quot;)
+URLs %&gt;% head()
+
+# criar raspagem de cada pagina -----------------------------------------------
+
+# funcao para pegar os links
+get_links = function(URL) {
+  y = read_html(URL) %&gt;% 
+    html_nodes(&quot;div h2 a&quot;) %&gt;% 
+    html_attr(&quot;href&quot;) %&gt;% 
+    {.[grepl(&quot;mercadolivre.com.br&quot;, .)]} %&gt;% 
+    unique() %&gt;% 
+    unlist()
+  return(y)
+}
+
+# pegar links dos produtos
+url.produtos = NULL
+for (i in 1:length(URLs)) {
+  res = try({
+    url.produtos = append(url.produtos, get_links(URL = URLs[i]))
+  })
+  if(inherits(res, &quot;try-error&quot;)) {
+    break
+  }
+}
+
+# imprimindo as primeiras entradas
+paste0(length(url.produtos), &quot; produto(s) localizado(s) seguindo o termo de busca: &quot;, termo)
+url.produtos %&gt;% head()
+
+# funcao para coleta - argumentos ---------------------------------------------
+#   @ descricao
+#   @ valor
+#   @ qdt vendidos
+
+get_atr_anuncio = function(url.prod) {
+  y = read_html(url.prod)
+  
+  # titulo
+  titulo = y %&gt;% 
+    html_nodes(&quot;div header&quot;) %&gt;% 
+    html_text() %&gt;% 
+    gsub(&quot;(\n|\t)&quot;, &quot;&quot;, .) %&gt;% 
+    stringi::stri_trans_general(., &quot;Latin-ASCII&quot;)
+  if(length(titulo) == 0) {
+    titulo = NA
+  }
+  
+  # descricao
+  descricao = y %&gt;% 
+    html_nodes(&quot;section div p&quot;) %&gt;% 
+    html_text() %&gt;% 
+    {.[2]} %&gt;% 
+    stringi::stri_trans_general(., &quot;Latin-ASCII&quot;)
+  if(length(descricao) == 0) {
+    descricao = NA
+  }
+  
+  # valor
+  valor = y %&gt;% 
+    html_nodes(&quot;fieldset span&quot;) %&gt;% 
+    html_attr(&quot;content&quot;) %&gt;% 
+    {.[!is.na(.)]} %&gt;% 
+    as.numeric()
+  if(length(valor) == 0) {
+    valor = NA
+  }
+  
+  # qtd vendidos
+  qtd_vendidos = y %&gt;% 
+    html_nodes(&quot;dl div&quot;) %&gt;% 
+    gsub('(&lt;div class=&quot;item-conditions&quot;&gt;|&lt;/div&gt;)', &quot;&quot;, .) %&gt;% 
+    gsub(&quot;(\n|\t)&quot;, &quot; &quot;, .) %&gt;% 
+    gsub(&quot;\\D&quot;, &quot;&quot;, .) %&gt;% 
+    as.numeric()
+  if(length(qtd_vendidos) == 0) {
+    qtd_vendidos = 0
+  }
+  y = cbind.data.frame(titulo, descricao, valor, qtd_vendidos)
+  return(y)
+}
+
+# criar loop para base de dados -----------------------------------------------
+
+cores = parallel::detectCores() # lendo quantos cores sua maquina tem
+cl = makeSOCKcluster(cores) # criando os clusters de trabalho em paralelo
+registerDoSNOW(cl) # registrando os clusters no sistema
+pb = txtProgressBar(min = 1, max = length(url.produtos), style = 3) # barrinha de progresso
+progress = function(n) setTxtProgressBar(pb, n) # colocando a barra de progresso como uma funcao de n
+opts = list(progress = progress) # adicionando lista de opcoes com a barra de progresso
+base = foreach(i = 1:length(url.produtos), # criando a base de dados em paralelo
+               .options.snow = opts, 
+               .combine = 'rbind', 
+               .packages = c(&quot;stringi&quot;, &quot;dplyr&quot;, &quot;rvest&quot;)) %dopar% {
+                 get_atr_anuncio(url.prod = url.produtos[i])
+}
+close(pb) # fechando a barra de progresso
+stopCluster(cl) # parando os clusters de trabalho
+
+base = base[complete.cases(base), ] # pegando apenas as linhas com informacoes completas
+
+# imprimindo os primeiros resultados
+paste0(nrow(base), &quot; produto(s) localizado(s) seguindo o termo de busca: &quot;, termo, &quot; com tabelamento completo&quot;)
+base %&gt;% head()
+
+# verifidando medidas resumo para o termo de busca
+summary(base$valor)
+
+# salvar a base de dados ------------------------------------------------------
+# write.csv2(base, &quot;base.csv&quot;, row.names = F)</code></pre>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>
 [1] &quot;1 página(s) de produtos&quot;</code></pre>
@@ -2340,8 +2490,8 @@ distill-header .nav a {
 [1] &quot;https://produto.mercadolivre.com.br/MLB-1097808875-notebook-lenovo-thinkpad-e470-i5-6200u-8gb-ram-ssd-240-_JM&quot;   
 [2] &quot;https://produto.mercadolivre.com.br/MLB-1122641247-notebook-lenovo-e470-i7-hd1tb-geforce-940mx-_JM&quot;              
 [3] &quot;https://produto.mercadolivre.com.br/MLB-1067881850-dell-optiplex-5050sff-i5-7-8gb-hd-1-tb-_JM&quot;                   
-[4] &quot;https://produto.mercadolivre.com.br/MLB-1029182718-notebook-lenovo-e470-i5-8gb-de-ram-ssd-256gb-_JM&quot;             
-[5] &quot;https://produto.mercadolivre.com.br/MLB-1102487323-note-lenovo-thinkpad-e470-intel-core-i7-7500u-8gb-1tb-14-_JM&quot; 
+[4] &quot;https://produto.mercadolivre.com.br/MLB-1102487323-note-lenovo-thinkpad-e470-intel-core-i7-7500u-8gb-1tb-14-_JM&quot; 
+[5] &quot;https://produto.mercadolivre.com.br/MLB-1029182718-notebook-lenovo-e470-i5-8gb-de-ram-ssd-256gb-_JM&quot;             
 [6] &quot;https://produto.mercadolivre.com.br/MLB-1064692062-lenovo-notebook-thinkpad-e470-tela-14-intel-core-i5-7200u-_JM&quot;</code></pre>
 <pre><code>
   |                                                                  
