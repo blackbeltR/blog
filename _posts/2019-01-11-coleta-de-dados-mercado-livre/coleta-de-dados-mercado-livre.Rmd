@@ -1,6 +1,7 @@
 ---
 title: "Coleta de dados - Mercado Livre"
 description: "como usar rvest para raspar dados no Mercado Livre"
+preview: ./img/ml.jpg
 author:
   - name: Pedro Carvalho Brom
     url: http://blackbeltr.com.br/
