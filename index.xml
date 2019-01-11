@@ -12,20 +12,22 @@ objetivo é formar faixas-pretas em R!
     <generator>Radix</generator>
     <lastBuildDate>sex, 11 jan 2019 00:00:00 +0000</lastBuildDate>
     <item>
+      <title>Comprimindo PDFs com R</title>
+      <dc:creator>Pedro Carvalho Brom</dc:creator>
+      <link>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</link>
+      <description>Como usar o poder do Linux combinado com o R para comprimir PDFs</description>
+      <guid>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</guid>
+      <pubDate>sex, 11 jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r/./img/compress.png" medium="image" type="image/png" width="630" height="630"/>
+    </item>
+    <item>
       <title>Coleta de dados - Mercado Livre</title>
       <dc:creator>Pedro Carvalho Brom</dc:creator>
       <link>https://blackbeltR.github.io/blog/posts/2019-01-11-coleta-de-dados-mercado-livre</link>
       <description>como usar rvest para raspar dados no Mercado Livre</description>
       <guid>https://blackbeltR.github.io/blog/posts/2019-01-11-coleta-de-dados-mercado-livre</guid>
       <pubDate>sex, 11 jan 2019 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Comprimindo PDFs com R</title>
-      <dc:creator>Pedro Carvalho Brom</dc:creator>
-      <link>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</link>
-      <description>Como usar o poder do Linux combinado com o R para comprimir PDFs</description>
-      <guid>https://blackbeltR.github.io/blog/posts/2019-01-09-comprimindo-pdfs-com-r</guid>
-      <pubDate>qua, 09 jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-11-coleta-de-dados-mercado-livre/./img/ml.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>Jogos de tabuleiro em números</title>
