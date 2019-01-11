@@ -1,0 +1,175 @@
+---
+title: "Coleta de dados - Mercado Livre"
+description: "como usar rvest para raspar dados no Mercado Livre"
+author:
+  - name: Pedro Carvalho Brom
+    url: http://blackbeltr.com.br/
+date: "`r Sys.Date()`"
+output:
+  radix::radix_article:
+    self_contained: true
+tags: ["r", "raspagem de dados", "mercado livre"]
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+```
+
+[Mercado Livre (ML)](http://mercadolivre.com.br/){target="blank_"} é um local "onde se compra e vende de tudo". Outro dia meu notebook deu problema da abertura da tela e não tinha mais como ficar abrindo e fechando então o transformei em uma estação de mídia da minha casa (i3 com 8GB de ram), usando o [Linux Mint MATE 19](https://linuxmint.com/){target="blank_"} instalei o [Stremio](https://www.stremio.com/br/){target="blank_"} (Fica a dica).
+
+Voltando ao ponto do ML. O note deu problema e tive que fazer uma pesquisa para avaliar os preços e saber se o que o vendedor está cobrando está acima ou abaixo do mercado, mas fiquei com preguiça (sim essa é uma habilidade dos programadores) de fazer um trabalho manual então resolvi abrir o RStudio e botar a mão na massa, mais ou menos uns 30 minutos depois depois cheguei neste script abaixo.
+
+Depois foi simples garimpar os dados de modo mais eficiente. Façam os testes.
+
+```{r,message=FALSE,warning=FALSE}
+require(rvest) # para raspargem de dados
+require(dplyr) # para uso de pipes
+require(doSNOW) # processamento em paralelo
+
+# TERMO DE BUSCA --------------------------------------------------------------
+termo = "lenovo thinkpad e470" # adicione o termo de busca
+
+# funcao para criar padrao das urls -------------------------------------------------------
+get_url = function(termo) {
+  # prefixos da url
+  p1 = "https://lista.mercadolivre.com.br/%5B"
+  p2 = termo %>% strsplit(., " ") %>% unlist() %>% paste0(., collapse = "-")
+  p3 = "%5D_Desde_"
+  p4 = paste0(0, 1)
+  p5 = "_DisplayType_LF"
+  
+  # juntando tudo
+  y = paste0(p1, p2, p3, p4)
+  qtd = read_html(y) %>%
+    html_nodes("aside div") %>% 
+    html_text() %>% 
+    {.[grepl("(resultados)$", .)]} %>% 
+    gsub("\\D", "", .) %>% 
+    as.numeric() %>% 
+    {./50} %>% 
+    ceiling() %>% 
+    {1:.}
+  p4 = paste0((qtd - 1) * 5, 1)
+  y = paste0(p1, p2, p3, p4, p5)
+  return(y)
+}
+
+# chamando url padrao para o termo de busca
+URLs = get_url(termo)
+
+# imprimindo as primeiras entradas
+paste0(length(URLs), " página(s) de produtos")
+URLs %>% head()
+
+# criar raspagem de cada pagina -----------------------------------------------
+
+# funcao para pegar os links
+get_links = function(URL) {
+  y = read_html(URL) %>% 
+    html_nodes("div h2 a") %>% 
+    html_attr("href") %>% 
+    {.[grepl("mercadolivre.com.br", .)]} %>% 
+    unique() %>% 
+    unlist()
+  return(y)
+}
+
+# pegar links dos produtos
+url.produtos = NULL
+for (i in 1:length(URLs)) {
+  res = try({
+    url.produtos = append(url.produtos, get_links(URL = URLs[i]))
+  })
+  if(inherits(res, "try-error")) {
+    break
+  }
+}
+
+# imprimindo as primeiras entradas
+paste0(length(url.produtos), " produto(s) localizado(s) seguindo o termo de busca: ", termo)
+url.produtos %>% head()
+
+# funcao para coleta - argumentos ---------------------------------------------
+#   @ descricao
+#   @ valor
+#   @ qdt vendidos
+
+get_atr_anuncio = function(url.prod) {
+  y = read_html(url.prod)
+  
+  # titulo
+  titulo = y %>% 
+    html_nodes("div header") %>% 
+    html_text() %>% 
+    gsub("(\n|\t)", "", .) %>% 
+    stringi::stri_trans_general(., "Latin-ASCII")
+  if(length(titulo) == 0) {
+    titulo = NA
+  }
+  
+  # descricao
+  descricao = y %>% 
+    html_nodes("section div p") %>% 
+    html_text() %>% 
+    {.[2]} %>% 
+    stringi::stri_trans_general(., "Latin-ASCII")
+  if(length(descricao) == 0) {
+    descricao = NA
+  }
+  
+  # valor
+  valor = y %>% 
+    html_nodes("fieldset span") %>% 
+    html_attr("content") %>% 
+    {.[!is.na(.)]} %>% 
+    as.numeric()
+  if(length(valor) == 0) {
+    valor = NA
+  }
+  
+  # qtd vendidos
+  qtd_vendidos = y %>% 
+    html_nodes("dl div") %>% 
+    gsub('(<div class="item-conditions">|</div>)', "", .) %>% 
+    gsub("(\n|\t)", " ", .) %>% 
+    gsub("\\D", "", .) %>% 
+    as.numeric()
+  if(length(qtd_vendidos) == 0) {
+    qtd_vendidos = 0
+  }
+  y = cbind.data.frame(titulo, descricao, valor, qtd_vendidos)
+  return(y)
+}
+
+# criar loop para base de dados -----------------------------------------------
+
+cores = parallel::detectCores() # lendo quantos cores sua maquina tem
+cl = makeSOCKcluster(cores) # criando os clusters de trabalho em paralelo
+registerDoSNOW(cl) # registrando os clusters no sistema
+pb = txtProgressBar(min = 1, max = length(url.produtos), style = 3) # barrinha de progresso
+progress = function(n) setTxtProgressBar(pb, n) # colocando a barra de progresso como uma funcao de n
+opts = list(progress = progress) # adicionando lista de opcoes com a barra de progresso
+base = foreach(i = 1:length(url.produtos), # criando a base de dados em paralelo
+               .options.snow = opts, 
+               .combine = 'rbind', 
+               .packages = c("stringi", "dplyr", "rvest")) %dopar% {
+                 get_atr_anuncio(url.prod = url.produtos[i])
+}
+close(pb) # fechando a barra de progresso
+stopCluster(cl) # parando os clusters de trabalho
+
+base = base[complete.cases(base), ] # pegando apenas as linhas com informacoes completas
+
+# imprimindo os primeiros resultados
+paste0(nrow(base), " produto(s) localizado(s) seguindo o termo de busca: ", termo, " com tabelamento completo")
+base %>% head()
+
+# verifidando medidas resumo para o termo de busca
+summary(base$valor)
+
+# salvar a base de dados ------------------------------------------------------
+# write.csv2(base, "base.csv", row.names = F)
+```
