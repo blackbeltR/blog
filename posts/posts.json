@@ -1,5 +1,20 @@
 [
   {
+    "path": "posts/2019-01-11-coleta-de-dados-mercado-livre/",
+    "title": "Coleta de dados - Mercado Livre",
+    "description": "como usar rvest para raspar dados no Mercado Livre",
+    "author": [
+      {
+        "name": "Pedro Carvalho Brom",
+        "url": "http://blackbeltr.com.br/"
+      }
+    ],
+    "date": "2019-01-11",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2019-01-11T10:33:06-02:00"
+  },
+  {
     "path": "posts/2019-01-09-comprimindo-pdfs-com-r/",
     "title": "Comprimindo PDFs com R",
     "description": "Como usar o poder do Linux combinado com o R para comprimir PDFs",

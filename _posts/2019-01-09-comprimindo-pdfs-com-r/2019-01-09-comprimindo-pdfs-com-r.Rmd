@@ -9,7 +9,6 @@ output:
   radix::radix_article:
     self_contained: false
 tags: ["linux", "r", "comprimir", "pdf"]
-
 ---
 
 ```{r setup, include=FALSE}
