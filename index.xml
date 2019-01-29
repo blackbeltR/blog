@@ -10,7 +10,16 @@ os próprios usuários possam contribuir com posts em nível acadêmico. Nosso
 objetivo é formar faixas-pretas em R!
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>sex, 11 jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>ter, 29 jan 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Como baixar livros no Passei Direto usando R e Linux</title>
+      <dc:creator>Pedro Carvalho Brom</dc:creator>
+      <link>https://blackbeltR.github.io/blog/posts/2019-01-29-bot-extrair-passei-direto</link>
+      <description>como usar o R para baixar livros sem ter que fazer upload</description>
+      <guid>https://blackbeltR.github.io/blog/posts/2019-01-29-bot-extrair-passei-direto</guid>
+      <pubDate>ter, 29 jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://blackbeltR.github.io/blog/posts/2019-01-29-bot-extrair-passei-direto/./img/passeidireto.jpeg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Comprimindo PDFs com R</title>
       <dc:creator>Pedro Carvalho Brom</dc:creator>
