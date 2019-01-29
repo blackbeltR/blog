@@ -1,18 +1,18 @@
 [
   {
-    "path": "posts/2019-01-11-coleta-de-dados-mercado-livre/",
-    "title": "Coleta de dados - Mercado Livre",
-    "description": "como usar rvest para raspar dados no Mercado Livre",
+    "path": "posts/2019-01-29-bot-extrair-passei-direto/",
+    "title": "Como baixar livros no Passei Direto usando R e Linux",
+    "description": "como usar o R para baixar livros sem ter que fazer upload",
     "author": [
       {
         "name": "Pedro Carvalho Brom",
         "url": "http://blackbeltr.com.br/"
       }
     ],
-    "date": "2019-01-11",
+    "date": "2019-01-29",
     "categories": [],
-    "preview": {},
-    "last_modified": "2019-01-11T10:33:06-02:00"
+    "preview": "posts/2019-01-29-bot-extrair-passei-direto/./img/passeidireto.jpeg",
+    "last_modified": "2019-01-29T11:48:14-02:00"
   },
   {
     "path": "posts/2019-01-09-comprimindo-pdfs-com-r/",
@@ -24,10 +24,27 @@
         "url": "http://blackbeltr.com.br/"
       }
     ],
-    "date": "2019-01-09",
+    "date": "2019-01-11",
     "categories": [],
-    "preview": {},
-    "last_modified": "2019-01-09T20:13:05-02:00"
+    "preview": "posts/2019-01-09-comprimindo-pdfs-com-r/./img/compress.png",
+    "last_modified": "2019-01-11T11:32:01-02:00",
+    "preview_width": 630,
+    "preview_height": 630
+  },
+  {
+    "path": "posts/2019-01-11-coleta-de-dados-mercado-livre/",
+    "title": "Coleta de dados - Mercado Livre",
+    "description": "como usar rvest para raspar dados no Mercado Livre",
+    "author": [
+      {
+        "name": "Pedro Carvalho Brom",
+        "url": "http://blackbeltr.com.br/"
+      }
+    ],
+    "date": "2019-01-11",
+    "categories": [],
+    "preview": "posts/2019-01-11-coleta-de-dados-mercado-livre/./img/ml.jpg",
+    "last_modified": "2019-01-11T11:25:09-02:00"
   },
   {
     "path": "posts/2019-01-08-jogos-de-tabuleiro-em-nmeros/",
